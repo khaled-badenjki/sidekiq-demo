@@ -1,4 +1,7 @@
+require "sidekiq/web"
 Rails.application.routes.draw do
+  mount Sidekiq::Web => "/sidekiq"
+
   get "welcome/index"
 
   # route where any visitor require the helloWorldJob to be triggered
