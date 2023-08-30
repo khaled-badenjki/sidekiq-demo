@@ -1,24 +1,30 @@
-# README
+# Sidekiq Demo
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[![Ruby Version](https://img.shields.io/badge/Ruby-3.1.0-red.svg)](https://www.ruby-lang.org/en/) [![Ruby Version](https://img.shields.io/badge/Rails-7.0.1-red.svg)](https://www.ruby-lang.org/en/)
 
-Things you may want to cover:
+## Introduction 📚
+A demo for sidekiq with Redis
 
-* Ruby version
+## Dependencies
+This service needs a running **redis** instance, and a **postgresql** database
+Also, you need the gem **foreman** to run parallel threads
 
-* System dependencies
+## Start
+To run a redis instance (assuming you have docker installed) run this:
 
-* Configuration
+    docker run -d --name redis-stack -p 6379:6379 -p 8001:8001 redis/redis-stack:latest
 
-* Database creation
+To run a postgresql instance, run this:
 
-* Database initialization
+    docker run --name postgres -e POSTGRES_USER=user -e POSTGRES_PASSWORD=pass -p 5432:5432 -d postgres
 
-* How to run the test suite
+To install foreman gem, run this:
 
-* Services (job queues, cache servers, search engines, etc.)
+    gem install foreman
 
-* Deployment instructions
+then run these to start the application
 
-* ...
+    rails db:create
+    rails db:migrate
+    foreman start -f Procfile.dev
+
